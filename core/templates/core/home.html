@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página Inicial</title>
+</head>
+<body>
+    <h1>Bem-vindo, {{ user.username }}!</h1>
+    
+    <h3>Seus Dados:</h3>
+    <ul>
+        <li><strong>Nome:</strong> {{ user.username }}</li>
+        <li><strong>E-mail:</strong> {{ user.email }}</li>
+        <li><strong>ID:</strong> {{ user.id }}</li>
+    </ul>
+
+    <hr>
+
+    <h3>Lista de Produtos</h3>
+    <a href="{% url 'add_produto' %}">Adicionar Produto</a>
+    <ul>
+        {% for produto in produtos %}
+            <li>
+                {{ produto.nome }} (Qtd: {{ produto.quantidade }})
+                <form action="{% url 'delete_produto' produto.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Remover</button>
+                </form>
+            </li>
+        {% empty %}
+            <li>Nenhum produto cadastrado.</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Sair (Logout)</button>
+    </form>
+</body>
+</html>

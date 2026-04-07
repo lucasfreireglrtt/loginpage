@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastro - Django</title>
+</head>
+<body>
+    <h1>Cadastro de Novo Usuário</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registrar</button>
+    </form>
+
+    <hr>
+    <p>Já tem uma conta? <a href="{% url 'login' %}">Faça Login aqui</a></p>
+</body>
+</html>
