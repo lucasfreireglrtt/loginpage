@@ -1,18 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro - Django</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Cadastro de Novo Usuário</h1>
-    
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Registrar</button>
-    </form>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
 
-    <hr>
-    <p>Já tem uma conta? <a href="{% url 'login' %}">Faça Login aqui</a></p>
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Criar Nova Conta</h1>
+        
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            
+            <div class="form-style">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200">
+                Registrar
+            </button>
+        </form>
+
+        <div class="mt-6 border-t pt-4 text-center">
+            <p class="text-sm text-gray-600">
+                Já tem uma conta? 
+                <a href="{% url 'login' %}" class="text-blue-600 hover:underline font-medium">Faça Login aqui</a>
+            </p>
+        </div>
+    </div>
+
+    <style>
+        .form-style p { margin-bottom: 1rem; }
+        .form-style label { display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.25rem; }
+        .form-style input { 
+            width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.375rem;
+            outline: none; transition: border-color 0.2s;
+        }
+        .form-style input:focus { border-color: #2563eb; ring: 2px; ring-color: #bfdbfe; }
+        .form-style .helptext { font-size: 0.75rem; color: #6b7280; display: block; margin-top: 0.25rem; }
+    </style>
 </body>
 </html>
